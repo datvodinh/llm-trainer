@@ -36,8 +36,5 @@ def get_parse_arguments():
                         help="Model name to push to the Hugging Face Hub.")
     parser.add_argument("--hf_token", type=str, default=None,
                         help="Hugging Face API token.")
-    parser.add_argument("--wandb_token", type=str, default=None,
-                        help="Wandb API token.")
-
     args = parser.parse_args()
     return args

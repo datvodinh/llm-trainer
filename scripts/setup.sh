@@ -1,3 +1,2 @@
 pip install .
-pip install --no-deps xformers trl peft accelerate bitsandbytes
-pip install triton
+pip install -U xformers --index-url https://download.pytorch.org/whl/cu121

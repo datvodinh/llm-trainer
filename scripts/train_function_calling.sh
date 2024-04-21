@@ -9,10 +9,6 @@ while [[ $# -gt 0 ]]; do
             hf_token="$2"
             shift
             shift ;;
-        --wandb_token)
-            wandb_token="$2"
-            shift
-            shift ;;
         *)
             echo "Unknown option: $1"
             exit 1 ;;
@@ -20,9 +16,9 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Check if required arguments are provided
-if [[ -z "$hf_username" || -z "$hf_token" || -z "$wandb_token" ]]; then
+if [[ -z "$hf_username" || -z "$hf_token" ]]; then
     echo "Error: Missing required arguments."
-    echo "Usage: train_function_calling.sh --hf_username <username> --hf_token <token> --wandb_token <token>"
+    echo "Usage: train_function_calling.sh --hf_username <username> --hf_token <token>"
     exit 1
 fi
 
@@ -44,4 +40,3 @@ python -m llm_trainer.function_calling \
     --hf_username "$hf_username" \
     --finetune_model_name "llama-3-8b-instruct-funtion-calling" \
     --hf_token "$hf_token" \
-    --wandb_token "$wandb_token" \
