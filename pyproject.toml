@@ -12,7 +12,7 @@ unsloth = {git = "https://github.com/unslothai/unsloth.git", extras = ["colab-ne
 einops = "^0.7.0"
 transformers = "^4.40.0"
 datasets = "^2.19.0"
-torch = "^2.2.2"
+torch = "*"
 wandb = "^0.16.6"
 huggingface-hub = "^0.22.2"
 

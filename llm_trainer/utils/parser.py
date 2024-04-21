@@ -10,7 +10,7 @@ def get_parse_arguments():
                         help="Batch size per GPU/CPU for training.")
     parser.add_argument("--gradient_accumulation_steps", type=int, default=4,
                         help="Number of updates steps to accumulate before performing a backward/update pass.")
-    parser.add_argument("--warmup_ratio", type=int, default=1,
+    parser.add_argument("--warmup_ratio", type=float, default=0.1,
                         help="Warmup ratio.")
     parser.add_argument("--num_train_epochs", type=int, default=1,
                         help="Total number of training epochs to perform.")
