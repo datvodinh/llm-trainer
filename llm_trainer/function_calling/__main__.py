@@ -1,5 +1,6 @@
 import os
 import torch
+import wandb
 import huggingface_hub
 from transformers import TrainingArguments
 from trl import SFTTrainer
@@ -7,14 +8,16 @@ from datasets import load_dataset
 from unsloth import FastLanguageModel
 from llm_trainer.utils import get_parse_arguments
 
-os.environ["WANDB_DISABLED"] = "true"
-
 if __name__ == "__main__":
     # ARGRUMENTS
     args = get_parse_arguments()
 
     # LOGIN
     huggingface_hub.login(token=args.hf_token)
+    if args.wandb_token is not None:
+        wandb.login(key=args.wandb_token)
+    else:
+        os.environ["WANDB_DISABLED"] = "true"
 
     # MODEL
     model, tokenizer = FastLanguageModel.from_pretrained(
@@ -24,7 +27,7 @@ if __name__ == "__main__":
 
     model = FastLanguageModel.get_peft_model(
         model,
-        r=64,
+        r=args.rank,
         target_modules=[
             "q_proj", "k_proj", "v_proj", "o_proj",
             "gate_proj", "up_proj", "down_proj",
@@ -77,6 +80,7 @@ if __name__ == "__main__":
             gradient_accumulation_steps=args.gradient_accumulation_steps,
             num_train_epochs=args.num_train_epochs,
             learning_rate=args.learning_rate,
+            max_steps=args.max_steps,
             fp16=not torch.cuda.is_bf16_supported(),
             bf16=torch.cuda.is_bf16_supported(),
             logging_steps=args.logging_steps,
@@ -86,6 +90,7 @@ if __name__ == "__main__":
             warmup_ratio=args.warmup_ratio,
             seed=args.seed,
             output_dir=args.output_dir,
+            report_to="wandb" if args.wandb_token is not None else None,
         ),
     )
 

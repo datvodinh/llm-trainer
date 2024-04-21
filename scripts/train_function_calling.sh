@@ -28,6 +28,7 @@ python -m llm_trainer.function_calling \
     --per_device_train_batch_size 4 \
     --gradient_accumulation_steps 4 \
     --warmup_ratio 0.1 \
+    --max_steps 3000 \
     --num_train_epochs 1 \
     --learning_rate 0.00002 \
     --logging_steps 10 \

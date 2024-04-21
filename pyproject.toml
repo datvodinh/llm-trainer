@@ -9,6 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 huggingface-hub = "^0.22.2"
+wandb = "^0.16.6"
 
 
 [build-system]

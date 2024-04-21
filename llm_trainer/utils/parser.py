@@ -10,6 +10,10 @@ def get_parse_arguments():
                         help="Batch size per GPU/CPU for training.")
     parser.add_argument("--gradient_accumulation_steps", type=int, default=4,
                         help="Number of updates steps to accumulate before performing a backward/update pass.")
+    parser.add_argument("--rank", type=int, default=16,
+                        help="LoRA Rank.")
+    parser.add_argument("--max_steps", type=int, default=-1,
+                        help="If > 0: set total number of training steps to perform. Override num_train_epochs.")
     parser.add_argument("--warmup_ratio", type=float, default=0.1,
                         help="Warmup ratio.")
     parser.add_argument("--num_train_epochs", type=int, default=1,
@@ -36,5 +40,7 @@ def get_parse_arguments():
                         help="Model name to push to the Hugging Face Hub.")
     parser.add_argument("--hf_token", type=str, default=None,
                         help="Hugging Face API token.")
+    parser.add_argument("--wandb_token", type=str, default=None,
+                        help="Wandb API token.")
     args = parser.parse_args()
     return args
