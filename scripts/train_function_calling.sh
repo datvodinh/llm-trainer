@@ -45,5 +45,5 @@ python -m llm_trainer.function_calling \
     --load_in_4bit \
     --hf_username "$hf_username" \
     --finetune_model_name "llama-3-8b-instruct-funtion-calling" \
-    --hf_token "$hf_token" \ 
+    --hf_token "$hf_token" \
     --wandb_token "$wandb_token" \
