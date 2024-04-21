@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-unsloth = {git = "https://github.com/unslothai/unsloth.git", extras = ["colab-new"]}
+unsloth = {git = "https://github.com/unslothai/unsloth.git", extras = ["kaggle-new"]}
 einops = "^0.7.0"
 transformers = "^4.40.0"
 datasets = "^2.19.0"

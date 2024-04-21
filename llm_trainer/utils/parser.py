@@ -30,10 +30,6 @@ def get_parse_arguments():
                         help="Directory to save model checkpoints and outputs.")
     parser.add_argument("--max_seq_length", type=int, default=8192,
                         help="Maximum sequence length.")
-    parser.add_argument("--dtype", type=str, default="float16",
-                        help="Data type.")
-    parser.add_argument("--load_in_4bit", action='store_true',
-                        help="Load data in 4-bit format.")
     parser.add_argument("--hf_username", type=str, default=None,
                         help="Hugging Face username.")
     parser.add_argument("--finetune_model_name", type=str, default="llama-3-8b-instruct-funtion-calling-v1",
