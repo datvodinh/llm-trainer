@@ -25,8 +25,8 @@ fi
 
 python -m llm_trainer.function_calling \
     --model_name "unsloth/llama-3-8b-Instruct-bnb-4bit" \
-    --per_device_train_batch_size 8 \
-    --gradient_accumulation_steps 1 \
+    --per_device_train_batch_size 4 \
+    --gradient_accumulation_steps 4 \
     --warmup_ratio 0.1 \
     --num_train_epochs 1 \
     --learning_rate 0.00002 \

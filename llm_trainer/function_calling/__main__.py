@@ -6,7 +6,6 @@ from trl import SFTTrainer
 from datasets import load_dataset
 from unsloth import FastLanguageModel
 from llm_trainer.utils import get_parse_arguments
-from unsloth.chat_templates import get_chat_template
 
 os.environ["WANDB_DISABLED"] = "true"
 
@@ -25,7 +24,7 @@ if __name__ == "__main__":
 
     model = FastLanguageModel.get_peft_model(
         model,
-        r=16,
+        r=64,
         target_modules=[
             "q_proj", "k_proj", "v_proj", "o_proj",
             "gate_proj", "up_proj", "down_proj",
@@ -34,34 +33,35 @@ if __name__ == "__main__":
         lora_dropout=0,
         bias="none",
         use_gradient_checkpointing="unsloth",
-        random_state=42,
+        random_state=args.seed,
         use_rslora=False,
         loftq_config=None,
     )
 
-    tokenizer = get_chat_template(
-        tokenizer,
-        chat_template='chatml',
-        mapping={
-            'role': 'from',
-            'content': 'value',
-            'user': 'user',
-            'assistant': 'assistant'
-        },
-        map_eos_token=True)
+    token_mapping = {
+        "bos": "<|begin_of_text|>",
+        "eos": "<|end_of_text|>",
+        "system": "<|start_header_id|>system<|end_header_id|>",
+        "user": "<|start_header_id|>user<|end_header_id|>",
+        "function": "function",
+        "assistant": "<|start_header_id|>assistant<|end_header_id|>",
+    }
 
     def format_dataset_func(examples):
         conversation = examples['conversation']
-        texts = [
-            tokenizer.apply_chat_template(conv, tokenize=False, add_generation_prompt=False)
-            for conv in conversation
-        ]
+
+        texts = [token_mapping["bos"]]
+        for conv in conversation:
+            texts.append(token_mapping[conv["role"]] + "\n")
+            texts.append(conv["content"] + "\n")
+
+        texts.append(token_mapping["eos"])
         return {
-            "text": texts
+            "text": "".join(texts),
         }
 
     dataset = load_dataset("dinhdat1110/glaive-function-calling-v2-cleaned", split="train")
-    dataset = dataset.map(format_dataset_func, batched=True,)
+    dataset = dataset.map(format_dataset_func)
 
     # TRAINER
     trainer = SFTTrainer(
