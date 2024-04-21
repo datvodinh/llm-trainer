@@ -41,7 +41,7 @@ python -m llm_trainer.function_calling \
     --seed 3407 \
     --output_dir "outputs" \
     --max_seq_length 8192 \
-    --dtype "None" \
+    --dtype "float16" \
     --load_in_4bit \
     --hf_username "$hf_username" \
     --finetune_model_name "llama-3-8b-instruct-funtion-calling" \
