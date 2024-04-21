@@ -13,6 +13,8 @@ einops = "^0.7.0"
 transformers = "^4.40.0"
 datasets = "^2.19.0"
 torch = "^2.2.2"
+wandb = "^0.16.6"
+huggingface-hub = "^0.22.2"
 
 
 [build-system]
