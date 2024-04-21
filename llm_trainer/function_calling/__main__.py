@@ -1,5 +1,4 @@
 import torch
-import wandb
 import huggingface_hub
 from transformers import TrainingArguments
 from trl import SFTTrainer
@@ -15,7 +14,9 @@ if __name__ == "__main__":
 
     # LOGIN
     huggingface_hub.login(token=args.hf_token)
-    wandb.login(key=args.wandb_token)
+    if args.wandb_token is not None:
+        import wandb
+        wandb.login(key=args.wandb_token)
 
     # MODEL
     model, tokenizer = FastLanguageModel.from_pretrained(
@@ -86,7 +87,7 @@ if __name__ == "__main__":
             warmup_ratio=args.warmup_ratio,
             seed=args.seed,
             output_dir=args.output_dir,
-            report_to="wandb",
+            report_to="wandb" if args.wandb_token is not None else None,
         ),
     )
 
