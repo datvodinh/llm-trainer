@@ -11,6 +11,12 @@ from unsloth.chat_templates import get_chat_template
 
 if __name__ == "__main__":
 
+    torch_dtype = {
+        "float32": torch.float32,
+        "float16": torch.float16,
+        "bf16": torch.bfloat16,
+    }
+
     # ARGRUMENTS
     args = get_parse_arguments()
 
@@ -22,7 +28,7 @@ if __name__ == "__main__":
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name=args.model_name,
         max_seq_length=args.max_seq_length,
-        dtype=args.dtype,
+        dtype=torch_dtype[args.dtype] if args.dtype is not None else None,
         load_in_4bit=args.load_in_4bit,
     )
 

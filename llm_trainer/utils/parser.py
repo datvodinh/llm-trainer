@@ -30,7 +30,7 @@ def get_parse_arguments():
                         help="Directory to save model checkpoints and outputs.")
     parser.add_argument("--max_seq_length", type=int, default=8192,
                         help="Maximum sequence length.")
-    parser.add_argument("--dtype", type=str, default=None,
+    parser.add_argument("--dtype", type=str, default="float16",
                         help="Data type.")
     parser.add_argument("--load_in_4bit", action='store_true',
                         help="Load data in 4-bit format.")
