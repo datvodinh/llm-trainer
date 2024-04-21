@@ -8,15 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-unsloth = {git = "https://github.com/unslothai/unsloth.git", extras = ["kaggle-new"]}
-einops = "^0.7.0"
-transformers = "^4.40.0"
-datasets = "2.16.0"
-torch = "*"
-wandb = "^0.16.6"
 huggingface-hub = "^0.22.2"
-gcsfs = "2023.10.0"
-fsspec = "2023.10.0"
 
 
 [build-system]
