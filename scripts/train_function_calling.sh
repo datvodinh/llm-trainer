@@ -26,7 +26,7 @@ fi
 python -m llm_trainer.function_calling \
     --model_name "unsloth/llama-3-8b-Instruct-bnb-4bit" \
     --per_device_train_batch_size 8 \
-    --gradient_accumulation_steps 4 \
+    --gradient_accumulation_steps 1 \
     --warmup_ratio 0.1 \
     --num_train_epochs 1 \
     --learning_rate 0.00002 \
@@ -39,4 +39,4 @@ python -m llm_trainer.function_calling \
     --max_seq_length 2048 \
     --hf_username "$hf_username" \
     --finetune_model_name "llama-3-8b-instruct-funtion-calling" \
-    --hf_token "$hf_token" \
+    --hf_token "$hf_token"

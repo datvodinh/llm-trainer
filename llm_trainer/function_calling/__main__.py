@@ -89,8 +89,7 @@ if __name__ == "__main__":
         ),
     )
 
-    llm_trainer = trainer.train()
-    llm_trainer.fit()
+    trainer.train()
 
     # SAVE MODEL TO Q4_K_M GGUF
     model.save_pretrained_gguf(
