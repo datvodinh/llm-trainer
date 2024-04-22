@@ -42,5 +42,7 @@ def get_parse_arguments():
                         help="Hugging Face API token.")
     parser.add_argument("--wandb_token", type=str, default=None,
                         help="Wandb API token.")
+    parser.add_argument("--quantization_method", type=str, default="f16",
+                        help="Quantization method to use.")
     args = parser.parse_args()
     return args

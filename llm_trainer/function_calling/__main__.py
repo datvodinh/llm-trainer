@@ -99,6 +99,6 @@ if __name__ == "__main__":
     model.push_to_hub_gguf(
         f"{args.hf_username}/{args.finetune_model_name}",
         tokenizer,
-        quantization_method="f16",
+        quantization_method=args.quantization_method,
         token=args.hf_token,
     )
