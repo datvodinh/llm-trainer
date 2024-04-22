@@ -96,12 +96,6 @@ if __name__ == "__main__":
 
     trainer.train()
 
-    # SAVE MODEL TO Q4_K_M GGUF
-    model.save_pretrained_gguf(
-        args.finetune_model_name,
-        tokenizer,
-        quantization_method="q4_k_m"
-    )
     model.push_to_hub_gguf(
         f"{args.hf_username}/{args.finetune_model_name}",
         tokenizer,
