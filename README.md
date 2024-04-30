@@ -24,9 +24,9 @@ source scripts/setup_kaggle.sh
 
 ```bash
 source scripts/train_function_calling.sh \
---hf_username dinhdat1110 \
---hf_token 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 \
---wandb_token 844fc0e4bcb3ee33a64c04b9ba845966de80180e
+--hf_username <YOUR_USENAME> \
+--hf_token <YOUR_HUGGINGFACE_TOKEN> \
+--wandb_token <YOUR_WANDB_TOKEN>
 ```
 
 ### Instruction
